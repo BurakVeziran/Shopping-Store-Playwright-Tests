@@ -1,11 +1,12 @@
 {
-  "name": "playwrightcourse",
+  "name": "shoppingstoreplaywrighttest",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test:sh": "npm test",
-    "test": "playwright test --headed"
+    "test": "playwright test --headed",
+    "test:ci": "playwright test"
   },
   "keywords": [],
   "author": "",
