@@ -1,5 +1,5 @@
 import {expect} from "@playwright/test";
-import {deliveryDetails} from "../js/randomValueGenerator.js";
+import {deliveryDetails} from "../js/data.js";
 
 export class DeliveryDetailsPage {
     constructor(page) {

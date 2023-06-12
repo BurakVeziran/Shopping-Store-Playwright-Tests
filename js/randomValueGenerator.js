@@ -1,4 +1,4 @@
-function randomValue (length) {
+export function randomValue (length) {
     let result           = '';
     const characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const charactersLength = characters.length;
@@ -8,7 +8,7 @@ function randomValue (length) {
     return result;
 }
 
-function randomTextValue (length) {
+export function randomTextValue (length) {
     let result           = '';
     const characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
     const charactersLength = characters.length;
@@ -18,7 +18,7 @@ function randomTextValue (length) {
     return result;
 }
 
-function randomNumberValue (length) {
+export function randomNumberValue (length) {
     let result           = '';
     const characters       = '0123456789';
     const charactersLength = characters.length;
@@ -28,7 +28,7 @@ function randomNumberValue (length) {
     return result;
 }
 
-function generateRandomFutureDate() {
+export function generateRandomFutureDate() {
      const currentDate = new Date();
      const randomMonths = Math.floor(Math.random() * 12) + 1;
      const futureDate = new Date(currentDate.getFullYear(),
@@ -37,26 +37,4 @@ function generateRandomFutureDate() {
      const year = futureDate.getFullYear().toString().substr(-2);
      const formattedDate = month + '/' + year;
      return formattedDate;
-}
-
-export const deliveryDetails = {
-    firstName: randomTextValue(5),
-    lastName: randomTextValue(5),
-    street: randomTextValue(5) + " " + randomValue(5),
-    postCode: randomNumberValue(5),
-    city: randomTextValue(5),
-    country: "Turkey",
-}
-
-export const loginInformation = {
-    randomEmail: randomValue(10)+"@gmail.com",
-    randomPassword: randomValue(10),
-}
-
-export const creditCardInformation = {
-    cardOwner: randomValue(5) + " " + randomValue(5),
-    cardNumber: randomNumberValue(4) + " " + randomNumberValue(4) + " " +
-    randomNumberValue(4) + " " + randomNumberValue(4),
-    validDate: generateRandomFutureDate(),
-    cvc: randomNumberValue(3)
 }

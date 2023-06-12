@@ -1,5 +1,5 @@
 import {expect} from "@playwright/test";
-import {creditCardInformation} from "../js/randomValueGenerator.js";
+import {creditCardInformation} from "../js/data.js";
 
 export class PaymentPage {
     constructor(page) {

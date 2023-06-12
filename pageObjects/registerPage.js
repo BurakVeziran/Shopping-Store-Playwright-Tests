@@ -1,4 +1,4 @@
-import {loginInformation} from "../js/randomValueGenerator.js";
+import {loginInformation} from "../js/data.js";
 export class RegisterPage {
     constructor(page) {
         this.page = page
