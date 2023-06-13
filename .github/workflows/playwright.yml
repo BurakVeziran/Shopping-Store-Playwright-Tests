@@ -13,7 +13,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Run tests
-        run: | 
+        run: |
+          apt install sudo
           echo "Start the shopping store application"
           sudo chmod a+x ./shopping-store-linux-amd64 ./shopping-store-linux-amd64 &
           echo "Install dependencies from lockfile"
