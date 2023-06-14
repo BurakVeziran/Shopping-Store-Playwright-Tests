@@ -15,7 +15,7 @@ jobs:
       - name: Run tests
         run: |
           echo "Start the shopping store application"
-          sudo chmod a+x ./shopping-store-linux-amd64 
+          chmod a+x ./shopping-store-linux-amd64 
           ./shopping-store-linux-amd64 &
           echo "Install dependencies from lockfile"
           npm ci
