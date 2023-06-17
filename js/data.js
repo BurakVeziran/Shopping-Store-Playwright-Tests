@@ -4,7 +4,7 @@ import {randomValue} from "./randomValueGenerator.js";
 import {generateRandomFutureDate} from "./randomValueGenerator.js";
 export const adminDetails = {
     username: "admin",
-    password: process.env.ADMIN_PASSWORD,
+    password: "Admin123",
 }
 
 export const deliveryDetails = {

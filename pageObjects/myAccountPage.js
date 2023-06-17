@@ -7,9 +7,10 @@ export class myAccountPage {
 
     visit = async () => {
         await this.page.goto("/my-account")
-        waitForPageHeading = async () => {
-            await this.pageHeading.waitFor()}
     }
+    waitForPageHeading = async () => {
+        await this.pageHeading.waitFor()}
+
     waitForErrorMessage = async () => {
         await this.errorMessage.waitFor()
     }

@@ -10,7 +10,7 @@ import {PaymentPage} from "../pageObjects/paymentPage.js";
 test ("new User full end-to-end journey", async ({page}) => {
     const productPage = new productsPage (page)
     await productPage.visit()
-    await productPage.sortByCheapest()
+    await productPage.sortByCheapestSimpleCheck()
     await productPage.addProductToBasket(0)
     await productPage.addProductToBasket(1)
     await productPage.addProductToBasket(2)
