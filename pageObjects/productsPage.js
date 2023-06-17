@@ -68,6 +68,30 @@ export class productsPage {
         expect(SecondOption).toBeGreaterThan(firstOption);
     }
 
+    sortByMostExpensiveComplexCheck = async () => {
+        await this.sortDropdown.waitFor()
+        await this.productTitle.first().waitFor()
+        await this.sortDropdown.selectOption("price-desc")
+        let productPrices = await this.page.$$eval('[datatype="product-price"]', elements => elements.map(item => item.innerText));
+        let output = [];
+        for (let i = 0; i < productPrices.length; i++) {
+            const text = productPrices[i].slice(0, -1);
+            output.push(text);
+        }
+        const pricesJson =  JSON.stringify(output);
+        const parsedProductPrices =  JSON.parse(pricesJson);
+        const firstOption =  parseInt(parsedProductPrices[0]);
+        const SecondOption =  parseInt(parsedProductPrices[1]);
+        const thirdOption =  parseInt(parsedProductPrices[2]);
+        const fourthOption =  parseInt(parsedProductPrices[3]);
+        const lastOption =  parseInt(parsedProductPrices[productPrices.length - 1]);
+        expect(lastOption).toBeLessThan(firstOption);
+        expect(lastOption).toBeLessThan(fourthOption);
+        expect(fourthOption).toBeLessThan(thirdOption);
+        expect(thirdOption).toBeLessThan(SecondOption);
+        expect(SecondOption).toBeLessThan(firstOption);
+    }
+
     productCountAdd = async () => {
         const firstAddButton = this.addButtons.nth(0)
         const secondAddButton = this.addButtons.nth(2)
