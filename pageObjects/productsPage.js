@@ -104,7 +104,6 @@ export class productsPage {
         await expect (fifthAddButton).toHaveText("Add to Basket")
         const navigation = new Navigation(this.page)
         // only desktop viewport
-        let basketCountBeforeAdding = 0
         if (isDesktopViewport(this.page)) {
             const basketCountBeforeAdding = await navigation.getBasketCount()
             expect (basketCountBeforeAdding) === 0
@@ -144,7 +143,6 @@ export class productsPage {
         await expect (fifthAddButton).toHaveText("Remove from Basket")
         const navigation = new Navigation(this.page)
         // only desktop viewport
-        let basketCountBeforeAdding = 0
         if (isDesktopViewport(this.page)) {
             const basketCountBeforeAdding = await navigation.getBasketCount()
             expect (basketCountBeforeAdding) === 0
