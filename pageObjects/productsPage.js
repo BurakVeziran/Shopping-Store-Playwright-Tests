@@ -48,7 +48,8 @@ export class productsPage {
         await this.sortDropdown.waitFor()
         await this.productTitle.first().waitFor()
         await this.sortDropdown.selectOption("price-asc")
-        let productPrices = await this.page.$$eval('[datatype="product-price"]', elements => elements.map(item => item.innerText));
+        let productPrices = await this.page.$$eval('[datatype="product-price"]',
+                elements => elements.map(item => item.innerText));
         let output = [];
         for (let i = 0; i < productPrices.length; i++) {
             const text = productPrices[i].slice(0, -1);
@@ -72,7 +73,8 @@ export class productsPage {
         await this.sortDropdown.waitFor()
         await this.productTitle.first().waitFor()
         await this.sortDropdown.selectOption("price-desc")
-        let productPrices = await this.page.$$eval('[datatype="product-price"]', elements => elements.map(item => item.innerText));
+        let productPrices = await this.page.$$eval('[datatype="product-price"]',
+                elements => elements.map(item => item.innerText));
         let output = [];
         for (let i = 0; i < productPrices.length; i++) {
             const text = productPrices[i].slice(0, -1);

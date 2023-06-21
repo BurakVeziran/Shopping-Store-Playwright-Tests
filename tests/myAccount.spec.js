@@ -3,7 +3,8 @@ import { myAccountPage } from "../pageObjects/myAccountPage.js"
 import { getLoginToken } from "../js/getLoginToken.js"
 import { adminDetails } from "../js/data.js"
 
-test ("My Account using cookie injection and mocking network reques", async ({ page }) => {
+test ("My Account using cookie injection and mocking network " +
+    "request", async ({ page }) => {
     const loginToken = await getLoginToken(adminDetails.username, adminDetails.password)
     await page.route("**/api/user**", async (route, request) => {
         await route.fulfill({

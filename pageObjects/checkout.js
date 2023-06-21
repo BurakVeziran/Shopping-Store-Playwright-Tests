@@ -1,9 +1,7 @@
 import {expect} from "@playwright/test";
-import {productsPage} from "./productsPage.js";
 export class Checkout {
     constructor(page) {
         this.page = page
-
         this.basketCards = page.locator('[data-qa="basket-card"]')
         this.itemPrice = page.locator('[data-qa="basket-item-price"]')
         this.removeFormBasketButton = page.locator('[data-qa="basket-card-remove-item"]')
@@ -36,7 +34,8 @@ export class Checkout {
     totalPrice = async () => {
        await this.checkoutMenuButton.waitFor()
        await this.checkoutMenuButton.click()
-        let productPrices = await this.page.$$eval('[data-qa="basket-item-price"]', elements => elements.map(item => item.innerText));
+        let productPrices = await this.page.$$eval('[data-qa="basket-item-price"]',
+                elements => elements.map(item => item.innerText));
         let output = [];
         for (let i = 0; i < productPrices.length; i++) {
             const text = productPrices[i].slice(0, -1);
@@ -51,7 +50,8 @@ export class Checkout {
         convertPricesToNumber.forEach(item => {
             calculatedTotalPrices += item;
         });
-        let totalPrice = await this.page.$$eval('[class="font-bold"]', elements => elements.map(item => item.innerText));
+        let totalPrice = await this.page.$$eval('[class="font-bold"]',
+                elements => elements.map(item => item.innerText));
         let totalPriceWithoutDolarSign = [];
         for (let i = 0; i < totalPrice.length; i++) {
             const text = totalPrice[i].slice(0, -1);
