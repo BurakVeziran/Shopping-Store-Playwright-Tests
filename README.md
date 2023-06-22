@@ -9,6 +9,7 @@ This repository contains a comprehensive test suite built using JavaScript and N
 - [Installation](#installation)
 - [Usage](#usage)
 - [Writing Tests](#writing-tests)
+- [GitHub Action](#github-actions)
 - [Running Tests](#running-tests)
 - [Contributing](#contributing)
 - [License](#license)
@@ -57,6 +58,22 @@ To run the tests, you can use the following commands:
   ```bash
   npm run test:ci
   ```
+  
+## GitHub Actions
+
+This repository is configured to work with GitHub Actions, allowing you to automate the testing process and run tests in a CI/CD environment. The included workflow file, .github/workflows/playwright.yml, contains the necessary configuration to execute the tests whenever changes are pushed to the repository.
+
+The workflow uses Node.js and Playwright to set up the testing environment and execute the test suite. Here's how it works:
+
+1. When a new commit is pushed to the repository, GitHub Actions triggers the workflow defined in .github/workflows/tests.yml.
+
+2. The workflow starts by checking out the repository code to the runner environment.
+
+3. It installs Node.js and the required dependencies using the specified Node.js version.
+
+4. The Playwright test script is executed using the npm test command, running the tests in a headed mode (browser window visible) by default.
+
+The test results are displayed in the workflow log, providing information about the test execution, any failures, and the overall test status.
 
 ## Writing Tests
 
