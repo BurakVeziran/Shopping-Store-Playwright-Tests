@@ -29,7 +29,7 @@ Before running the tests, make sure you have the following software installed on
 
 1. Clone this repository to your local machine using the following command:
    ```bash
-   git clone https://github.com/your-username/shopping-store-playwright-test.git
+   git clone https://github.com/BurakVeziran/shopping-store-playwright-test.git
    ```
 
 2. Navigate to the cloned directory:
