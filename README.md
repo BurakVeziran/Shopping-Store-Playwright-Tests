@@ -82,7 +82,7 @@ The test suite is organized using the folder structure under the `tests` directo
 To create a new test file, follow these steps:
 
 1. Navigate to the `tests` directory.
-2. Create a new JavaScript file with a descriptive name that reflects the feature you want to test (e.g., `checkout.spec.js`).
+2. Create a new JavaScript file with a descriptive name that reflects the feature you want to test (e.g., `checkout.spec.ts`).
 3. Write your test cases using the Playwright. Refer to the [Playwright documentation](https://playwright.dev/docs/intro) for detailed information on how to write tests.
 
 ## Running Tests

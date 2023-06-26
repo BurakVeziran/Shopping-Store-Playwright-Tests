@@ -19,17 +19,11 @@ export class productsPage {
         await specificAddButton.waitFor()
         await expect (specificAddButton).toHaveText("Add to Basket")
         const navigation = new Navigation(this.page)
-        // only desktop viewport
-        let basketCountBeforeAdding = 0
-        if (isDesktopViewport(this.page)) {
-            const basketCountBeforeAdding = await navigation.getBasketCount()
-            expect (basketCountBeforeAdding) === 0
-        }
+        let basketCountBeforeAdding = await navigation.getBasketCount()
         await specificAddButton.click()
         await expect (specificAddButton).toHaveText("Remove from Basket")
-        // only desktop viewport
         if (isDesktopViewport(this.page)) {
-            const basketCountAfterAdding = await navigation.getBasketCount()
+            let basketCountAfterAdding = await navigation.getBasketCount()
             expect (basketCountAfterAdding).toBeGreaterThan(basketCountBeforeAdding)
         }
 
@@ -44,78 +38,60 @@ export class productsPage {
         expect (productTitlesAfterSorting).not.toEqual(productTitlesBeforeSorting)
     }
 
-     sortByCheapestComplexCheck = async () => {
+    sortByPriceComplexCheck = async (sortOption) => {
         await this.sortDropdown.waitFor()
         await this.productTitle.first().waitFor()
-        await this.sortDropdown.selectOption("price-asc")
+        await this.sortDropdown.selectOption(sortOption)
         let productPrices = await this.page.$$eval('[datatype="product-price"]',
-                elements => elements.map(item => item.innerText));
+            elements => elements.map(item => item.innerText));
         let output = [];
         for (let i = 0; i < productPrices.length; i++) {
             const text = productPrices[i].slice(0, -1);
             output.push(text);
         }
-        const pricesJson =  JSON.stringify(output);
-        const parsedProductPrices =  JSON.parse(pricesJson);
-        const firstOption =  parseInt(parsedProductPrices[0]);
-        const SecondOption =  parseInt(parsedProductPrices[1]);
-        const thirdOption =  parseInt(parsedProductPrices[2]);
-        const fourthOption =  parseInt(parsedProductPrices[3]);
-        const lastOption =  parseInt(parsedProductPrices[productPrices.length - 1]);
-        expect(lastOption).toBeGreaterThan(firstOption);
-        expect(lastOption).toBeGreaterThan(fourthOption);
-        expect(fourthOption).toBeGreaterThan(thirdOption);
-        expect(thirdOption).toBeGreaterThan(SecondOption);
-        expect(SecondOption).toBeGreaterThan(firstOption);
+        let pricesJson =  JSON.stringify(output);
+        let parsedProductPrices =  JSON.parse(pricesJson);
+        let firstOption =  parseInt(parsedProductPrices[0]);
+        let SecondOption =  parseInt(parsedProductPrices[1]);
+        let thirdOption =  parseInt(parsedProductPrices[2]);
+        let fourthOption =  parseInt(parsedProductPrices[3]);
+        let lastOption =  parseInt(parsedProductPrices[productPrices.length - 1]);
+
+        if (sortOption === "price-asc") {
+            expect(lastOption).toBeGreaterThan(firstOption);
+            expect(lastOption).toBeGreaterThan(fourthOption);
+            expect(fourthOption).toBeGreaterThan(thirdOption);
+            expect(thirdOption).toBeGreaterThan(SecondOption);
+            expect(SecondOption).toBeGreaterThan(firstOption);
+        } else if (sortOption === "price-desc") {
+            expect(lastOption).toBeLessThan(firstOption);
+            expect(lastOption).toBeLessThan(fourthOption);
+            expect(fourthOption).toBeLessThan(thirdOption);
+            expect(thirdOption).toBeLessThan(SecondOption);
+            expect(SecondOption).toBeLessThan(firstOption);
+        }
+    }
+
+    sortByCheapestComplexCheck = async () => {
+        await this.sortByPriceComplexCheck("price-asc");
     }
 
     sortByMostExpensiveComplexCheck = async () => {
-        await this.sortDropdown.waitFor()
-        await this.productTitle.first().waitFor()
-        await this.sortDropdown.selectOption("price-desc")
-        let productPrices = await this.page.$$eval('[datatype="product-price"]',
-                elements => elements.map(item => item.innerText));
-        let output = [];
-        for (let i = 0; i < productPrices.length; i++) {
-            const text = productPrices[i].slice(0, -1);
-            output.push(text);
-        }
-        const pricesJson =  JSON.stringify(output);
-        const parsedProductPrices =  JSON.parse(pricesJson);
-        const firstOption =  parseInt(parsedProductPrices[0]);
-        const SecondOption =  parseInt(parsedProductPrices[1]);
-        const thirdOption =  parseInt(parsedProductPrices[2]);
-        const fourthOption =  parseInt(parsedProductPrices[3]);
-        const lastOption =  parseInt(parsedProductPrices[productPrices.length - 1]);
-        expect(lastOption).toBeLessThan(firstOption);
-        expect(lastOption).toBeLessThan(fourthOption);
-        expect(fourthOption).toBeLessThan(thirdOption);
-        expect(thirdOption).toBeLessThan(SecondOption);
-        expect(SecondOption).toBeLessThan(firstOption);
+        await this.sortByPriceComplexCheck("price-desc");
+    }
+
+    productButtonOperation = async (buttonIndex, operation) => {
+        let button = this.addButtons.nth(buttonIndex)
+        await button.waitFor()
+        await button.click()
+        await expect (button).toHaveText(operation === 'add' ? "Remove from Basket" : "Add to Basket")
     }
 
     productCountAdd = async () => {
-        const firstAddButton = this.addButtons.nth(0)
-        const secondAddButton = this.addButtons.nth(2)
-        const fifthAddButton = this.addButtons.nth(4)
-        await firstAddButton.waitFor()
-        await secondAddButton.waitFor()
-        await fifthAddButton.waitFor()
-        await expect (firstAddButton).toHaveText("Add to Basket")
-        await expect (secondAddButton).toHaveText("Add to Basket")
-        await expect (fifthAddButton).toHaveText("Add to Basket")
         const navigation = new Navigation(this.page)
-        // only desktop viewport
-        if (isDesktopViewport(this.page)) {
-            const basketCountBeforeAdding = await navigation.getBasketCount()
-            expect (basketCountBeforeAdding) === 0
-        }
-        await firstAddButton.click()
-        await secondAddButton.click()
-        await fifthAddButton.click()
-        await expect (firstAddButton).toHaveText("Remove from Basket")
-        await expect (secondAddButton).toHaveText("Remove from Basket")
-        await expect (fifthAddButton).toHaveText("Remove from Basket")
+        await this.productButtonOperation(0, 'add')
+        await this.productButtonOperation(2, 'add')
+        await this.productButtonOperation(4, 'add')
         // only desktop viewport
         if (isDesktopViewport(this.page)) {
             const basketCountAfterAdding = await navigation.getBasketCount()
@@ -126,33 +102,13 @@ export class productsPage {
         }
     }
 
-
     productCountRemove = async () => {
-        const firstAddButton = this.addButtons.nth(0)
-        const secondAddButton = this.addButtons.nth(2)
-        const fifthAddButton = this.addButtons.nth(4)
-        await firstAddButton.waitFor()
-        await secondAddButton.waitFor()
-        await fifthAddButton.waitFor()
-        await expect (firstAddButton).toHaveText("Add to Basket")
-        await expect (secondAddButton).toHaveText("Add to Basket")
-        await expect (fifthAddButton).toHaveText("Add to Basket")
-        await firstAddButton.click()
-        await secondAddButton.click()
-        await fifthAddButton.click()
-        await expect (firstAddButton).toHaveText("Remove from Basket")
-        await expect (secondAddButton).toHaveText("Remove from Basket")
-        await expect (fifthAddButton).toHaveText("Remove from Basket")
         const navigation = new Navigation(this.page)
-        // only desktop viewport
-        if (isDesktopViewport(this.page)) {
-            const basketCountBeforeAdding = await navigation.getBasketCount()
-            expect (basketCountBeforeAdding) === 0
-        }
-        await secondAddButton.click()
-        await fifthAddButton.click()
-        await expect (secondAddButton).toHaveText("Add to Basket")
-        await expect (fifthAddButton).toHaveText("Add to Basket")
+        await this.productButtonOperation(0, 'add')
+        await this.productButtonOperation(2, 'add')
+        await this.productButtonOperation(4, 'add')
+        await this.productButtonOperation(2, 'remove')
+        await this.productButtonOperation(4, 'remove')
         // only desktop viewport
         if (isDesktopViewport(this.page)) {
             const basketCountAfterAdding = await navigation.getBasketCount()
@@ -161,6 +117,10 @@ export class productsPage {
         }
     }
 }
+
+
+
+
 
 
 
