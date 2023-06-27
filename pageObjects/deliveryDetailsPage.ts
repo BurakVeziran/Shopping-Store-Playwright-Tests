@@ -1,7 +1,25 @@
 import {expect} from "@playwright/test";
-import {deliveryDetails} from "../js/data.js";
+import {deliveryDetails} from "../ts/data.js";
+import { Page, Locator } from "@playwright/test";
 
 export class DeliveryDetailsPage {
+    private page: Page;
+    private firstNameInput: Locator;
+    private lastNameInput: Locator;
+    private streetInput: Locator;
+    private postcodeInput: Locator;
+    private cityInput: Locator;
+    private countryDropdown: Locator;
+    private saveAddressButton: Locator;
+    private savedAddressContainer: Locator;
+    private savedAddressFirstName: Locator;
+    private savedAddressLastName: Locator;
+    private savedAddressStreet: Locator;
+    private savedAddressPostcode: Locator;
+    private savedAddressCity: Locator;
+    private savedAddressCountry: Locator;
+    private continueToPaymentButton: Locator;
+
     constructor(page) {
         this.page = page
         this.firstNameInput = page.locator('[data-qa="delivery-first-name"]')
@@ -32,7 +50,8 @@ export class DeliveryDetailsPage {
         await this.streetInput.fill(deliveryDetails.street)
 
         await this.postcodeInput.waitFor()
-        await this.postcodeInput.fill(deliveryDetails.postCode)
+        await this.postcodeInput.fill(deliveryDetails.postCode);
+
 
         await this.cityInput.waitFor()
         await this.cityInput.fill(deliveryDetails.city)

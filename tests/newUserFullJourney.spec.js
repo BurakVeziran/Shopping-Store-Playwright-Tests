@@ -4,7 +4,7 @@ import {Navigation} from "../pageObjects/navigation.js";
 import {Checkout} from "../pageObjects/checkout.js";
 import {LoginPage} from "../pageObjects/loginPage.js";
 import {RegisterPage} from "../pageObjects/registerPage.js";
-import {DeliveryDetailsPage} from "../pageObjects/deliveryDetailsPage.js";
+import {DeliveryDetailsPage} from "../pageObjects/deliveryDetailsPage.ts";
 import {PaymentPage} from "../pageObjects/paymentPage.js";
 
 test ("new User full end-to-end journey", async ({page}) => {

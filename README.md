@@ -1,6 +1,6 @@
 # Shopping Store Playwright Test
 
-This repository contains a comprehensive test suite built using JavaScript and Node.js for testing the functionality of the Shopping Store application using Playwright. The tests cover various scenarios and user interactions to ensure the reliability and accuracy of the application.
+This repository contains a comprehensive test suite built using Typescript and Node.js for testing the functionality of the Shopping Store application using Playwright. The tests cover various scenarios and user interactions to ensure the reliability and accuracy of the application.
 
 ## Table of Contents
 

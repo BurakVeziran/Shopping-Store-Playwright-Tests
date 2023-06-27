@@ -1,4 +1,4 @@
-import {loginInformation} from "../js/data.js";
+import {loginInformation} from "../ts/data.js";
 export class RegisterPage {
     constructor(page) {
         this.page = page

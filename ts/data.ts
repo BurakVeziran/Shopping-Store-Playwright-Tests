@@ -2,12 +2,15 @@ import {randomTextValue} from "./randomValueGenerator.js";
 import {randomNumberValue} from "./randomValueGenerator.js";
 import {randomValue} from "./randomValueGenerator.js";
 import {generateRandomFutureDate} from "./randomValueGenerator.js";
-export const adminDetails = {
+
+export const adminDetails: {username: string, password: string}= {
     username: "admin",
     password: "Admin123",
 }
 
-export const deliveryDetails = {
+
+
+export const deliveryDetails: {firstName: string, lastName: string, street: string, postCode: string, city: string, country: string} = {
     firstName: randomTextValue(5),
     lastName: randomTextValue(5),
     street: randomTextValue(5) + " " + randomValue(5),

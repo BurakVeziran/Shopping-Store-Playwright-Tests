@@ -1,7 +1,7 @@
 import { test } from "@playwright/test"
 import { myAccountPage } from "../pageObjects/myAccountPage.js"
-import { getLoginToken } from "../js/getLoginToken.js"
-import { adminDetails } from "../js/data.js"
+import { getLoginToken } from "../ts/getLoginToken.js"
+import { adminDetails } from "../ts/data.ts"
 
 test ("My Account using cookie injection and mocking network " +
     "request", async ({ page }) => {

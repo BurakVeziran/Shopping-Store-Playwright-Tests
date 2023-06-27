@@ -1,4 +1,4 @@
-import { isDesktopViewport } from "../js/isDesktopViewport.js"
+import { isDesktopViewport } from "../ts/isDesktopViewport.ts"
 export class Navigation {
     constructor(page) {
         this.page = page

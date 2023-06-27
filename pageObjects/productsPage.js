@@ -1,6 +1,6 @@
 import {expect} from "@playwright/test";
 import {Navigation} from "./navigation.js";
-import { isDesktopViewport } from "../js/isDesktopViewport.js"
+import { isDesktopViewport } from "../ts/isDesktopViewport.ts"
 export class productsPage {
     constructor(page) {
         this.page = page
