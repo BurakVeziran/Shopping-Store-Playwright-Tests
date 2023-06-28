@@ -8,8 +8,6 @@ export const adminDetails: {username: string, password: string}= {
     password: "Admin123",
 }
 
-
-
 export const deliveryDetails: {firstName: string, lastName: string, street: string, postCode: string, city: string, country: string} = {
     firstName: randomTextValue(5),
     lastName: randomTextValue(5),
