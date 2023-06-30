@@ -1,16 +1,14 @@
 import {test} from "@playwright/test";
-import {productsPage} from "../pageObjects/productsPage.js";
+import {ProductsPage} from "../pageObjects/productsPage";
 
 test ("productCountAdd", async ({page}) => {
-    const productPage = new productsPage (page)
+    const productPage = new ProductsPage (page)
     await productPage.visit()
     await productPage.productCountAdd()
-
-
 })
 
 test ("productCountRemove", async ({page}) => {
-    const productPage = new productsPage (page)
+    const productPage = new ProductsPage (page)
     await productPage.visit()
     await productPage.productCountRemove()
 })

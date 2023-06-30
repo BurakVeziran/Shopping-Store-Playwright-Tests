@@ -1,7 +1,7 @@
-import {randomTextValue} from "./randomValueGenerator.js";
-import {randomNumberValue} from "./randomValueGenerator.js";
-import {randomValue} from "./randomValueGenerator.js";
-import {generateRandomFutureDate} from "./randomValueGenerator.js";
+import {randomTextValue} from "./randomValueGenerator";
+import {randomNumberValue} from "./randomValueGenerator";
+import {randomValue} from "./randomValueGenerator";
+import {generateRandomFutureDate} from "./randomValueGenerator";
 
 export const adminDetails: {username: string, password: string}= {
     username: "admin",

@@ -1,8 +1,8 @@
 import {test} from "@playwright/test";
-import {productsPage} from "../pageObjects/productsPage.js";
+import {ProductsPage} from "../pageObjects/productsPage";
 
 test ("sortFeature", async ({page}) => {
-    const productPage = new productsPage (page)
+    const productPage = new ProductsPage (page)
     await productPage.visit()
     await productPage.sortByCheapestComplexCheck()
     await productPage.sortByMostExpensiveComplexCheck()

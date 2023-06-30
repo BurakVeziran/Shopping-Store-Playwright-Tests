@@ -1,8 +1,22 @@
-import {expect} from "@playwright/test";
-import {creditCardInformation} from "../ts/data.js";
+import {expect, Page} from "@playwright/test";
+import {creditCardInformation} from "../ts/data";
 
 export class PaymentPage {
-    constructor(page) {
+    private page: Page;
+    private discountCode: import("@playwright/test").Locator;
+    private discountInput: import("@playwright/test").Locator;
+    private activateDiscountButton: import("@playwright/test").Locator;
+    private totalValue: import("@playwright/test").Locator;
+    private discountedValue: import("@playwright/test").Locator;
+    private discountActiveMessage: import("@playwright/test").Locator;
+    private creditCardOwnerInput: import("@playwright/test").Locator;
+    private creditCardNumberInput: import("@playwright/test").Locator;
+    private creditCardValidUntilInput: import("@playwright/test").Locator;
+    private creditCardCvcInput: import("@playwright/test").Locator;
+    private payButton: import("@playwright/test").Locator;
+
+
+    constructor(page: Page) {
         this.page = page
         this.discountCode = page.frameLocator('[data-qa="active-discount-container"]')
             .locator('[data-qa="discount-code"]')
@@ -23,11 +37,11 @@ export class PaymentPage {
         const code = await this.discountCode.innerText()
         await this.discountInput.waitFor()
 
-        // Option 1 for laggy inputs: using .fill() with await expect()
+        // Option 1 for input lag: using .fill() with await expect()
         await this.discountInput.fill(code)
         await expect(this.discountInput).toHaveValue(code)
 
-        // Option 2 for laggy inputs: slow typing
+        // Option 2 for input lag: slow typing
         // await this.discountInput.focus()
         // await this.page.keyboard.type(code, {delay: 1000})
         // expect(await this.discountInput.inputValue()).toBe(code)
@@ -41,12 +55,12 @@ export class PaymentPage {
         await this.discountActiveMessage.waitFor()
         // check that there is now a discounted price total showing
         await this.discountedValue.waitFor()
-        const discountValueText = await this.discountedValue.innerText() // "345$"
+        const discountValueText = await this.discountedValue.innerText()
         const discountValueOnlyStringNumber = discountValueText.replace("$", "")
         const discountValueNumber = parseInt(discountValueOnlyStringNumber, 10)
 
         await this.totalValue.waitFor()
-        const totalValueText = await this.totalValue.innerText() // "345$"
+        const totalValueText = await this.totalValue.innerText()
         const totalValueOnlyStringNumber = totalValueText.replace("$", "")
         const totalValueNumber = parseInt(totalValueOnlyStringNumber, 10)
         // check that the discounted price total is smaller than the regular one

@@ -1,14 +1,19 @@
-import {expect} from "@playwright/test";
-import {Navigation} from "./navigation.js";
-import { isDesktopViewport } from "../ts/isDesktopViewport.ts"
-export class productsPage {
-    constructor(page) {
+import { expect, Page } from "@playwright/test";
+import { Navigation } from "./navigation";
+import { isDesktopViewport } from "../ts/isDesktopViewport";
+
+export class ProductsPage {
+    private readonly page: Page;
+    private addButtons: import("@playwright/test").Locator;
+    private sortDropdown: import("@playwright/test").Locator;
+    private productTitle: import("@playwright/test").Locator;
+
+    constructor(page: Page) {
         this.page = page
         this.addButtons = page.locator('[data-qa="product-button"]')
         this.sortDropdown = page.locator('[data-qa="sort-dropdown"]')
         this.productTitle = page.locator('[data-qa="product-title"]')
     }
-
 
     visit = async () => {
         await this.page.goto("/")
@@ -43,7 +48,7 @@ export class productsPage {
         await this.productTitle.first().waitFor()
         await this.sortDropdown.selectOption(sortOption)
         let productPrices = await this.page.$$eval('[datatype="product-price"]',
-            elements => elements.map(item => item.innerText));
+            elements => elements.map(item => item.textContent));
         let output = [];
         for (let i = 0; i < productPrices.length; i++) {
             const text = productPrices[i].slice(0, -1);

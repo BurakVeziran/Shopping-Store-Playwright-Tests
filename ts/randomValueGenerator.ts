@@ -31,10 +31,11 @@ export function randomNumberValue(length: number): string {
 export function generateRandomFutureDate(): string {
     const currentDate = new Date();
     const randomMonths = Math.floor(Math.random() * 12) + 1;
-    const futureDate = new Date(currentDate.getFullYear(),
-        currentDate.getMonth() + randomMonths);
-    const month = (futureDate.getMonth() + 1).toString().padStart(2, '0');
-    const year = futureDate.getFullYear().toString().substr(-2);
-    const formattedDate = month + '/' + year;
-    return formattedDate;
+    const futureDate = new Date();
+    futureDate.setMonth(currentDate.getMonth() + randomMonths);
+
+    return futureDate.toLocaleDateString('en-US', {
+        month: '2-digit',
+        year: '2-digit',
+    });
 }

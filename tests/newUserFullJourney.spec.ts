@@ -1,14 +1,14 @@
 import {test} from "@playwright/test";
-import {productsPage} from "../pageObjects/productsPage.js";
-import {Navigation} from "../pageObjects/navigation.js";
-import {Checkout} from "../pageObjects/checkout.js";
-import {LoginPage} from "../pageObjects/loginPage.js";
-import {RegisterPage} from "../pageObjects/registerPage.js";
-import {DeliveryDetailsPage} from "../pageObjects/deliveryDetailsPage.ts";
-import {PaymentPage} from "../pageObjects/paymentPage.js";
+import {ProductsPage} from "../pageObjects/productsPage";
+import {Navigation} from "../pageObjects/navigation";
+import {Checkout} from "../pageObjects/checkout";
+import {LoginPage} from "../pageObjects/loginPage";
+import {RegisterPage} from "../pageObjects/registerPage";
+import {DeliveryDetailsPage} from "../pageObjects/deliveryDetailsPage";
+import {PaymentPage} from "../pageObjects/paymentPage";
 
 test ("new User full end-to-end journey", async ({page}) => {
-    const productPage = new productsPage (page)
+    const productPage = new ProductsPage (page)
     await productPage.visit()
     await productPage.sortByCheapestSimpleCheck()
     await productPage.addProductToBasket(0)

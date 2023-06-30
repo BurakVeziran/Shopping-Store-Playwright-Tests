@@ -1,5 +1,5 @@
 import {expect} from "@playwright/test";
-import {deliveryDetails} from "../ts/data.js";
+import {deliveryDetails} from "../ts/data";
 import { Page, Locator } from "@playwright/test";
 
 export class DeliveryDetailsPage {
@@ -59,6 +59,7 @@ export class DeliveryDetailsPage {
         await this.countryDropdown.waitFor()
         await this.countryDropdown.selectOption(deliveryDetails.country)
     }
+
     saveDetails = async () => {
         const addressCountBeforeSaving = await this.savedAddressContainer.count()
         await this.saveAddressButton.waitFor()
