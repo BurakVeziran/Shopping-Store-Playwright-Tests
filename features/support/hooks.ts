@@ -13,7 +13,7 @@ export const fixture = {
 
 BeforeAll({ timeout: 5 * 1000 }, async function (this: World) {
     browser = await chromium.launch({
-        headless: false,
+        headless: true,
     });
     page = await browser.newPage();
     fixture.page = page;

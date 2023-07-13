@@ -10,7 +10,7 @@ exports.fixture = {
 };
 (0, cucumber_1.BeforeAll)({ timeout: 5 * 1000 }, async function () {
     exports.browser = await test_1.chromium.launch({
-        headless: false,
+        headless: true,
     });
     exports.page = await exports.browser.newPage();
     exports.fixture.page = exports.page;
