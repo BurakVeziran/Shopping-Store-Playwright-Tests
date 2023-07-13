@@ -1,33 +1,36 @@
 import { expect, Page } from "@playwright/test";
 import { Navigation } from "./navigation";
 import { isDesktopViewport } from "../ts/isDesktopViewport";
+import {fixture} from "../features/support/hooks";
 
 export class ProductsPage {
-    private readonly page: Page;
-    private addButtons: import("@playwright/test").Locator;
-    private sortDropdown: import("@playwright/test").Locator;
-    private productTitle: import("@playwright/test").Locator;
+    page: Page;
+    private addButtons
+    private sortDropdown
+    private productTitle
+    private goto
 
     constructor(page: Page) {
         this.page = page
-        this.addButtons = page.locator('[data-qa="product-button"]')
-        this.sortDropdown = page.locator('[data-qa="sort-dropdown"]')
-        this.productTitle = page.locator('[data-qa="product-title"]')
+        this.addButtons = fixture.page.locator('[data-qa="product-button"]')
+        this.sortDropdown = fixture.page.locator('[data-qa="sort-dropdown"]')
+        this.productTitle = fixture.page.locator('[data-qa="product-title"]')
+        this.goto = fixture.page.goto("http://localhost:2221/")
     }
 
     visit = async () => {
-        await this.page.goto("/")
+        await this.goto
     }
 
     addProductToBasket = async (index) => {
         const specificAddButton = this.addButtons.nth(index)
         await specificAddButton.waitFor()
         await expect (specificAddButton).toHaveText("Add to Basket")
-        const navigation = new Navigation(this.page)
+        const navigation = new Navigation(this.page);
         let basketCountBeforeAdding = await navigation.getBasketCount()
         await specificAddButton.click()
         await expect (specificAddButton).toHaveText("Remove from Basket")
-        if (isDesktopViewport(this.page)) {
+        if (isDesktopViewport(fixture.page)) {
             let basketCountAfterAdding = await navigation.getBasketCount()
             expect (basketCountAfterAdding).toBeGreaterThan(basketCountBeforeAdding)
         }
@@ -47,7 +50,7 @@ export class ProductsPage {
         await this.sortDropdown.waitFor()
         await this.productTitle.first().waitFor()
         await this.sortDropdown.selectOption(sortOption)
-        let productPrices = await this.page.$$eval('[datatype="product-price"]',
+        let productPrices = await fixture.page.$$eval('[datatype="product-price"]',
             elements => elements.map(item => item.textContent));
         let output = [];
         for (let i = 0; i < productPrices.length; i++) {
@@ -93,12 +96,12 @@ export class ProductsPage {
     }
 
     productCountAdd = async () => {
-        const navigation = new Navigation(this.page)
+        const navigation = new Navigation(fixture.page)
         await this.productButtonOperation(0, 'add')
         await this.productButtonOperation(2, 'add')
         await this.productButtonOperation(4, 'add')
         // only desktop viewport
-        if (isDesktopViewport(this.page)) {
+        if (isDesktopViewport(fixture.page)) {
             const basketCountAfterAdding = await navigation.getBasketCount()
             expect (basketCountAfterAdding).toBeGreaterThan(0)
             expect (basketCountAfterAdding).toBeGreaterThan(1)
@@ -108,14 +111,14 @@ export class ProductsPage {
     }
 
     productCountRemove = async () => {
-        const navigation = new Navigation(this.page)
+        const navigation = new Navigation(fixture.page)
         await this.productButtonOperation(0, 'add')
         await this.productButtonOperation(2, 'add')
         await this.productButtonOperation(4, 'add')
         await this.productButtonOperation(2, 'remove')
         await this.productButtonOperation(4, 'remove')
         // only desktop viewport
-        if (isDesktopViewport(this.page)) {
+        if (isDesktopViewport(fixture.page)) {
             const basketCountAfterAdding = await navigation.getBasketCount()
             expect (basketCountAfterAdding).toBeGreaterThan(0)
             expect (basketCountAfterAdding).toBeLessThan(2)

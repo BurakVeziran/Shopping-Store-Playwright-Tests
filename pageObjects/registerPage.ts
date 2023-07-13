@@ -1,17 +1,19 @@
 import { Page, Locator } from "@playwright/test";
 import { loginInformation } from "../ts/data";
-
+import {fixture} from "../features/support/hooks";
 export class RegisterPage {
     private page: Page;
     private emailInput: Locator;
     private passwordInput: Locator;
     private registerButton: Locator;
+    private gotoDeliveryDetails: any;
 
     constructor(page: Page) {
         this.page = page;
-        this.emailInput = page.getByPlaceholder('e-mail');
-        this.passwordInput = page.getByPlaceholder('password');
-        this.registerButton = page.getByRole('button', { name: 'register' });
+        this.emailInput = fixture.page.getByPlaceholder('e-mail');
+        this.passwordInput = fixture.page.getByPlaceholder('password');
+        this.registerButton = fixture.page.getByRole('button', { name: 'register' });
+        this.gotoDeliveryDetails = fixture.page.waitForURL("http://localhost:2221/signup?redirect=/delivery-details/");
     }
 
     signUpAsNewUser = async (): Promise<void> => {
@@ -23,6 +25,7 @@ export class RegisterPage {
 
     await this.registerButton.waitFor();
     await this.registerButton.click();
-    await this.page.waitForURL(/\/delivery-details/, { timeout: 3000 });
+
+    await this.gotoDeliveryDetails;
     };
 }
