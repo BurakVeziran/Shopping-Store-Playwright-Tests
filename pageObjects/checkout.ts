@@ -1,16 +1,17 @@
 import { expect } from "@playwright/test";
-import { Page, Locator } from "@playwright/test";
+import { Locator } from "@playwright/test";
+import { AbstractPageObject } from "./AbstractPageObject";
+import { page } from '../features/support/hooks';
 
-export class Checkout {
-    private page: Page;
+export class Checkout extends AbstractPageObject {
     private basketCards: Locator;
     private itemPrice: Locator;
     private removeFormBasketButton: Locator;
     private continueToCheckoutButton: Locator;
     private checkoutMenuButton: Locator;
 
-    constructor(page: Page) {
-        this.page = page;
+    constructor() {
+        super(page);
         this.basketCards = page.locator('[data-qa="basket-card"]');
         this.itemPrice = page.locator('[data-qa="basket-item-price"]');
         this.removeFormBasketButton = page.locator('[data-qa="basket-card-remove-item"]');
