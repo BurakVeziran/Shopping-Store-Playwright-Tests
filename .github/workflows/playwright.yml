@@ -19,6 +19,7 @@ jobs:
           ./shopping-store-linux-amd64 &
           echo "Install dependencies from lockfile"
           npm ci
+          npm pretest
           echo "Run playwright tests"
           npm run test:ci
 
