@@ -1,5 +1,5 @@
-import { After, AfterAll, BeforeAll, Status, World } from '@cucumber/cucumber';
-import { chromium, Browser, Page } from '@playwright/test';
+import { After, AfterAll, BeforeAll, World } from '@cucumber/cucumber';
+import {chromium, Browser, Page, Locator} from '@playwright/test';
 import { Logger } from "winston";
 
 export let browser: Browser;
@@ -8,7 +8,8 @@ export let page: Page;
 export const fixture = {
     // @ts-ignore
     page: undefined as Page,
-    logger: undefined as Logger
+    logger: undefined as Logger,
+    getByRole: undefined as Locator,
 }
 
 BeforeAll({ timeout: 5 * 1000 }, async function (this: World) {

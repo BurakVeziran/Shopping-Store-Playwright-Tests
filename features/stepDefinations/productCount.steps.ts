@@ -12,7 +12,6 @@ When('I add the product count then the product count should increase', async fun
     await productPage.productCountAdd()
 });
 
-
 Given('I am on the Products page to remove product', async function () {
     productPage = new ProductsPage(page);
     await productPage.visit();

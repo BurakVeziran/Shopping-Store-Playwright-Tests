@@ -3,7 +3,6 @@ import {randomNumberValue} from "./randomValueGenerator";
 import {randomValue} from "./randomValueGenerator";
 import {generateRandomFutureDate} from "./randomValueGenerator";
 
-
 export const adminDetails: {username: string, password: string}= {
     username: "admin",
     password: "Admin123",

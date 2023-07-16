@@ -9,6 +9,7 @@
   },
   "include": [
     "./tests/**/*",
+    "./pageObjects/**/*",
     "./features/stepDefinations/**/*",
     "./features/support/**/*"
   ]

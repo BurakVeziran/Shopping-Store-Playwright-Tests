@@ -1,5 +1,5 @@
 Feature: New User full end-to-end journey
-
+  @smoke
   Scenario: User completes a full purchase journey
     Given I visit the products page
     And I sort products by cheapest

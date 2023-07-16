@@ -27,7 +27,6 @@ class Navigation {
             await this.mobileBurgerButton.click();
         }
         await this.checkoutLink.click();
-        // await this.page.waitForURL("/basket");
         await this.basketURL;
     };
 }

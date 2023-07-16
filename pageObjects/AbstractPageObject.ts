@@ -7,4 +7,3 @@ export abstract class AbstractPageObject {
         this.page = page;
     }
 }
-

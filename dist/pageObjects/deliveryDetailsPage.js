@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeliveryDetailsPage = void 0;
 const test_1 = require("@playwright/test");
 const data_1 = require("../ts/data");
+const hooks_1 = require("../features/support/hooks");
 class DeliveryDetailsPage {
     page;
     firstNameInput;
@@ -22,21 +23,21 @@ class DeliveryDetailsPage {
     continueToPaymentButton;
     constructor(page) {
         this.page = page;
-        this.firstNameInput = page.locator('[data-qa="delivery-first-name"]');
-        this.lastNameInput = page.locator('[data-qa="delivery-last-name"]');
-        this.streetInput = page.locator('[data-qa="delivery-address-street"]');
-        this.postcodeInput = page.locator('[data-qa="delivery-postcode"]');
-        this.cityInput = page.locator('[data-qa="delivery-city"]');
-        this.countryDropdown = page.locator('[data-qa="country-dropdown"]');
-        this.saveAddressButton = page.getByRole('button', { name: 'Save address for next time' });
-        this.savedAddressContainer = page.locator('[data-qa="saved-address-container"]');
-        this.savedAddressFirstName = page.locator('[data-qa="saved-address-firstName"]');
-        this.savedAddressLastName = page.locator('[data-qa="saved-address-lastName"]');
-        this.savedAddressStreet = page.locator('[data-qa="saved-address-street"]');
-        this.savedAddressPostcode = page.locator('[data-qa="saved-address-postcode"]');
-        this.savedAddressCity = page.locator('[data-qa="saved-address-city"]');
-        this.savedAddressCountry = page.locator('[data-qa="saved-address-country"]');
-        this.continueToPaymentButton = page.getByRole('button', { name: 'Continue to payment' });
+        this.firstNameInput = hooks_1.fixture.page.locator('[data-qa="delivery-first-name"]');
+        this.lastNameInput = hooks_1.fixture.page.locator('[data-qa="delivery-last-name"]');
+        this.streetInput = hooks_1.fixture.page.locator('[data-qa="delivery-address-street"]');
+        this.postcodeInput = hooks_1.fixture.page.locator('[data-qa="delivery-postcode"]');
+        this.cityInput = hooks_1.fixture.page.locator('[data-qa="delivery-city"]');
+        this.countryDropdown = hooks_1.fixture.page.locator('[data-qa="country-dropdown"]');
+        this.saveAddressButton = hooks_1.fixture.page.getByRole('button', { name: 'Save address for next time' });
+        this.savedAddressContainer = hooks_1.fixture.page.locator('[data-qa="saved-address-container"]');
+        this.savedAddressFirstName = hooks_1.fixture.page.locator('[data-qa="saved-address-firstName"]');
+        this.savedAddressLastName = hooks_1.fixture.page.locator('[data-qa="saved-address-lastName"]');
+        this.savedAddressStreet = hooks_1.fixture.page.locator('[data-qa="saved-address-street"]');
+        this.savedAddressPostcode = hooks_1.fixture.page.locator('[data-qa="saved-address-postcode"]');
+        this.savedAddressCity = hooks_1.fixture.page.locator('[data-qa="saved-address-city"]');
+        this.savedAddressCountry = hooks_1.fixture.page.locator('[data-qa="saved-address-country"]');
+        this.continueToPaymentButton = hooks_1.fixture.page.getByRole('button', { name: 'Continue to payment' });
     }
     fillDetails = async () => {
         await this.firstNameInput.waitFor();
@@ -75,7 +76,6 @@ class DeliveryDetailsPage {
     continueToPayment = async () => {
         await this.continueToPaymentButton.waitFor();
         await this.continueToPaymentButton.click();
-        await this.page.waitForURL(/\/payment/, { timeout: 3000 });
     };
 }
 exports.DeliveryDetailsPage = DeliveryDetailsPage;

@@ -1,6 +1,7 @@
 import {expect} from "@playwright/test";
 import {deliveryDetails} from "../ts/data";
 import { Page, Locator } from "@playwright/test";
+import {fixture} from "../features/support/hooks";
 
 export class DeliveryDetailsPage {
     private page: Page;
@@ -22,21 +23,21 @@ export class DeliveryDetailsPage {
 
     constructor(page) {
         this.page = page
-        this.firstNameInput = page.locator('[data-qa="delivery-first-name"]')
-        this.lastNameInput = page.locator('[data-qa="delivery-last-name"]')
-        this.streetInput = page.locator('[data-qa="delivery-address-street"]')
-        this.postcodeInput = page.locator('[data-qa="delivery-postcode"]')
-        this.cityInput = page.locator('[data-qa="delivery-city"]')
-        this.countryDropdown = page.locator('[data-qa="country-dropdown"]')
-        this.saveAddressButton = page.getByRole('button', { name: 'Save address for next time' })
-        this.savedAddressContainer = page.locator('[data-qa="saved-address-container"]')
-        this.savedAddressFirstName = page.locator('[data-qa="saved-address-firstName"]')
-        this.savedAddressLastName = page.locator('[data-qa="saved-address-lastName"]')
-        this.savedAddressStreet = page.locator('[data-qa="saved-address-street"]')
-        this.savedAddressPostcode = page.locator('[data-qa="saved-address-postcode"]')
-        this.savedAddressCity = page.locator('[data-qa="saved-address-city"]')
-        this.savedAddressCountry = page.locator('[data-qa="saved-address-country"]')
-        this.continueToPaymentButton = page.getByRole('button', { name: 'Continue to payment' })
+        this.firstNameInput = fixture.page.locator('[data-qa="delivery-first-name"]')
+        this.lastNameInput = fixture.page.locator('[data-qa="delivery-last-name"]')
+        this.streetInput = fixture.page.locator('[data-qa="delivery-address-street"]')
+        this.postcodeInput = fixture.page.locator('[data-qa="delivery-postcode"]')
+        this.cityInput = fixture.page.locator('[data-qa="delivery-city"]')
+        this.countryDropdown = fixture.page.locator('[data-qa="country-dropdown"]')
+        this.saveAddressButton = fixture.page.getByRole('button', { name: 'Save address for next time' })
+        this.savedAddressContainer = fixture.page.locator('[data-qa="saved-address-container"]')
+        this.savedAddressFirstName = fixture.page.locator('[data-qa="saved-address-firstName"]')
+        this.savedAddressLastName = fixture.page.locator('[data-qa="saved-address-lastName"]')
+        this.savedAddressStreet = fixture.page.locator('[data-qa="saved-address-street"]')
+        this.savedAddressPostcode = fixture.page.locator('[data-qa="saved-address-postcode"]')
+        this.savedAddressCity = fixture.page.locator('[data-qa="saved-address-city"]')
+        this.savedAddressCountry = fixture.page.locator('[data-qa="saved-address-country"]')
+        this.continueToPaymentButton = fixture.page.getByRole('button', { name: 'Continue to payment' })
     }
 
     fillDetails = async () => {
@@ -90,7 +91,5 @@ export class DeliveryDetailsPage {
     continueToPayment = async () => {
         await this.continueToPaymentButton.waitFor()
         await this.continueToPaymentButton.click()
-        await this.page.waitForURL(/\/payment/, { timeout: 3000 })
     }
 }
-

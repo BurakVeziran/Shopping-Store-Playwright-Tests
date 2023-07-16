@@ -1,4 +1,5 @@
 Feature: My Account using cookie injection and mocking network
+
   Scenario: User tries to access My Account with a mocked network error
     Given I have a valid login token
     And I mock the user API to return a 500 error

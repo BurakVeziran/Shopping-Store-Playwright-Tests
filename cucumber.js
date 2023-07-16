@@ -1,6 +1,5 @@
 module.exports = {
     default: {
-        parallel: 2,
-
+        parallel: 5,
     }
 }

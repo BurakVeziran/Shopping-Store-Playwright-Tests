@@ -2,7 +2,6 @@ export const { Given, When, Then } = require('@cucumber/cucumber');
 const { ProductsPage } = require('../../pageObjects/productsPage');
 const { Checkout } = require('../../pageObjects/checkout');
 
-
 Given('I am on the Products page', async function () {
     const page = this.page;
     const productPage = new ProductsPage(page);

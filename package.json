@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "pretest": "tsc --incremental -p tsconfig.json",
-    "test": "cucumber-js --require ./dist/features/stepDefinations/**/**/* --config ./cucumber.js --tags @smoke",
+    "test": "cucumber-js --require ./dist/features/stepDefinations/**/**/* --config ./cucumber.js  --tags @smoke",
     "test:ci": "cucumber-js --require ./dist/features/stepDefinations/**/**/* --config ./cucumber.js --tags @smoke"
   },
   "keywords": [],

@@ -6,7 +6,7 @@ export class RegisterPage {
     private emailInput: Locator;
     private passwordInput: Locator;
     private registerButton: Locator;
-    private gotoDeliveryDetails: any;
+    readonly gotoDeliveryDetails: any;
 
     constructor(page: Page) {
         this.page = page;
@@ -25,7 +25,5 @@ export class RegisterPage {
 
     await this.registerButton.waitFor();
     await this.registerButton.click();
-
-    await this.gotoDeliveryDetails;
     };
 }

@@ -23,7 +23,6 @@ class RegisterPage {
         await this.passwordInput.fill(data_1.loginInformation.randomPassword);
         await this.registerButton.waitFor();
         await this.registerButton.click();
-        await this.gotoDeliveryDetails;
     };
 }
 exports.RegisterPage = RegisterPage;
